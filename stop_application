@@ -1,7 +1,16 @@
 #!/bin/bash
 
 set -e
-yum upadte -y
-yum install tomcat7 -y
-systemctl start tomcat7
+sudo -i 
+yum update -y 
+yum install ruby -y 
+yum install wget -y 
+
+yum erase codedeploy-agent -y
+cd /home/ec2-user
+wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto -v releases/codedeploy-agent-version.noarch.rpm
+sudo service codedeploy-agent status
+sudo service codedeploy-agent start
 systemctl stop tomcat7 
